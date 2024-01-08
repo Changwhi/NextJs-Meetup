@@ -30,8 +30,25 @@ const DUMMY_MEETUPS = [
     description: "this is 4 meetup"
   },
 ]
-export default function Home() {
+
+interface meetups {
+  meetups: [{
+    id: string,
+    title: string,
+    image: string,
+    address: string,
+    description: string
+  }
+  ]
+}
+export default async function Home(props: meetups) {
+  const meetups = await getProps()
   return (
-    <MeetupList meetups={DUMMY_MEETUPS}> </MeetupList>
+    <MeetupList meetups={meetups}> </MeetupList>
     )
+}
+async function getProps() {
+  //Async, fetch data before rendering Home page. And pass that props to Home component.
+  //So, Home component can be pre rendered with fetched data
+    return DUMMY_MEETUPS
 }
