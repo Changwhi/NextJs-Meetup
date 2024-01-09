@@ -31,24 +31,34 @@ const DUMMY_MEETUPS = [
   },
 ]
 
-interface meetups {
-  meetups: [{
-    id: string,
-    title: string,
-    image: string,
-    address: string,
-    description: string
+interface HomeProps {
+  meetups: {
+    id: string;
+    title: string;
+    image: string;
+    address: string;
+    description: string;
   }
-  ]
+  
 }
-export default async function Home(props: meetups) {
+export default async function Home() {
   const meetups = await getProps()
   return (
     <MeetupList meetups={meetups}> </MeetupList>
     )
 }
+
 async function getProps() {
+
   //Async, fetch data before rendering Home page. And pass that props to Home component.
   //So, Home component can be pre rendered with fetched data
+   
+  //To update fetched data. 
+  //becaues this function will pass the data while it builts. So after building this 
+  //website, if you update data, it does not apply to the website. to apply new data to your website,
+  //You should redploy the website, but it will handle it without redploying if you use revalidate.
+  
+  //const res = await fetch(`https://.../posts`, { next: { revalidate: 60 } })
+
     return DUMMY_MEETUPS
 }
