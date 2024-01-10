@@ -6,7 +6,7 @@ import { MongoClient, ObjectId } from "mongodb";
 // if you set it to true, which is default, it will show a fallback page
 // while the page is being generated, 'false' shows you 404 page.
 
-export const dynamicParams = false;
+export const dynamicParams ='block';
 
 async function getPost(meetupId: string) {
   const client = await MongoClient.connect(
