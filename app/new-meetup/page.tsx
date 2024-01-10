@@ -1,13 +1,22 @@
-'use client'
+"use client";
 
-import NewMeetUpForm from '../../components/meetups/NewMeetupForm'
+import NewMeetUpForm from "../../components/meetups/NewMeetupForm";
 
 const NewMeetupPage = () => {
-    function addMeetupHandler(enteredMeetupData: any) {
-
-    }
-    return <NewMeetUpForm onAddMeetup={addMeetupHandler}></NewMeetUpForm>
-
-}
+  async function POST(enteredMeetupData: any) {
+    const response = await fetch("/api/", {
+      method: "POST",
+      body: JSON.stringify(enteredMeetupData),
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+    
+    const data = await response
+    console.log(data)
+    
+  }
+  return <NewMeetUpForm onAddMeetup={POST}></NewMeetUpForm>;
+};
 
 export default NewMeetupPage;

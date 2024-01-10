@@ -8,9 +8,8 @@ interface ResponseData {
     description: string;
 }
 
-async function handler(req: any, res: any) {
-    if (req.method === 'POST'){
-        const data = req.body as unknown as ResponseData;
+export async function POST(req: Request, res: any) {
+        const data = await req.json() as ResponseData;
         const {title, image, address, description} = data;
         const client = await MongoClient.connect('mongodb+srv://changwhi:102030@cluster0.h59cv.mongodb.net/?retryWrites=true&w=majority')
         const db = client.db();
@@ -20,11 +19,9 @@ async function handler(req: any, res: any) {
         console.log(result)
 
         client.close()
-        
-        res.status(201).json({message: "meetup inserted"})
 
-    }
+
+        return new Response('Success!', {
+    status: 201})
 
 }
-
-export default handler
