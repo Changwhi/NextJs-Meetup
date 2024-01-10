@@ -1,23 +1,19 @@
 import MeetupList from "../components/meetups/MeetupList";
 import { MongoClient } from "mongodb";
-interface HomeProps {
-  meetups: {
-    id: string;
-    title: string;
-    image: string;
-    address: string;
-    description: string;
-  };
-}
+
 export default async function Home() {
   const meetups = await getProps();
-  return <MeetupList meetups={meetups}> </MeetupList>;
+  return (
+    <MeetupList
+      meetups={meetups}
+    ></MeetupList>
+  );
 }
 
 async function getProps() {
   // the code inside of this function will not be stored in the client side.
   const client = await MongoClient.connect(
-    "mongodb+srv://changwhi:102030@cluster0.h59cv.mongodb.net/?retryWrites=true&w=majority"
+    `mongodb+srv://${process.env.MONGODB_ID}:${process.env.MONGODB_PASSWORD}@cluster0.h59cv.mongodb.net/?retryWrites=true&w=majority`
   );
   const db = client.db();
 
