@@ -3,11 +3,7 @@ import { MongoClient } from "mongodb";
 
 export default async function Home() {
   const meetups = await getProps();
-  return (
-    <MeetupList
-      meetups={meetups}
-    ></MeetupList>
-  );
+  return <MeetupList meetups={meetups}></MeetupList>;
 }
 
 async function getProps() {
